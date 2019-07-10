@@ -1,0 +1,28 @@
+{
+  "name": "ROB",
+  "version": "0.0.1",
+  "description": "Some tools for ramda",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "code-style": "xo"
+  },
+  "pre-commit": [
+    "code-style"
+  ],
+  "xo": {
+    "envs": [
+      "mocha"
+    ],
+    "space": 2,
+    "prettier": true
+  },
+  "devDependencies": {
+    "pre-commit": "^1.2.2",
+    "xo": "^0.24.0"
+  },
+  "dependencies": {
+    "ramda": "^0.26.1"
+  }
+}
