@@ -1,15 +1,16 @@
 {
-  "name": "ROB",
-  "version": "0.0.1",
+  "name": "bobda",
+  "version": "0.1.0",
   "description": "Some tools for ramda",
-  "main": "index.js",
+  "main": "bobda.js",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
+    "test": "nyc mocha --recursive",
     "code-style": "xo"
   },
   "pre-commit": [
-    "code-style"
+    "code-style",
+    "test"
   ],
   "xo": {
     "envs": [
@@ -19,10 +20,17 @@
     "prettier": true
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "deep-equal-in-any-order": "^1.0.13",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
     "pre-commit": "^1.2.2",
+    "rewire": "^4.0.1",
+    "sinon": "^7.3.2",
     "xo": "^0.24.0"
   },
   "dependencies": {
+    "bluebird": "^3.5.5",
     "ramda": "^0.26.1"
   }
 }
