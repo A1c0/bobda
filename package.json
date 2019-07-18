@@ -1,6 +1,6 @@
 {
   "name": "bobda",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Some tools for ramda",
   "main": "bobda.js",
   "repository": {
