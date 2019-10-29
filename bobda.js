@@ -1,9 +1,26 @@
 const R = require('ramda');
-const Bromise = require('bluebird');
 
-const bromiseMap = R.flip(R.binary(Bromise.map));
-const bromiseProps = Bromise.props;
-const bromiseAll = Bromise.all;
+const promiseAll = R.bind(Promise.all, Promise);
+
+const _awaitAllPromiseValues = R.pipe(
+  R.values,
+  promiseAll
+);
+
+const promiseProps = R.pipe(
+  R.juxt([R.keys, _awaitAllPromiseValues]),
+  R.pipe(
+    promiseAll,
+    R.then(R.apply(R.zipObj))
+  )
+);
+
+const promiseMap = R.curry((fn, list) =>
+  R.pipe(
+    R.map(fn),
+    promiseAll
+  )(list)
+);
 
 const renameProp = (from, to) =>
   R.pipe(
@@ -27,9 +44,9 @@ const multiPath = R.curry((mappingRename, objToRename) =>
 );
 
 module.exports = {
-  bromiseProps,
-  bromiseMap,
-  bromiseAll,
+  promiseProps,
+  promiseMap,
+  promiseAll,
   renameProp,
   renamePath,
   multiPath

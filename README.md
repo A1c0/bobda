@@ -12,9 +12,9 @@ It's an add-on module for [Ramda](https://ramdajs.com/), so all functions are [c
 - [Installation](#Installation)
 - [Documentation](#Documentation)
   - [Async Functions](#Async-Functions)
-    - [bromiseMap](#bromiseMap)
-    - [bromiseAll](#bromiseAll)
-    - [bromiseProps](#bromiseProps)
+    - [promiseMap](#promisemap)
+    - [promiseAll](#promiseall)
+    - [promiseProps](#promiseprops)
   - [Object properties functions](#Object-properties-functions)
     - [renameProp](#renameprop)
     - [renamePath](#renamepath)
@@ -37,11 +37,9 @@ $ npm install bobda
 
 ### Async Functions
 
-We used the [Bluebird](http://bluebirdjs.com/docs/getting-started.html) functions and adapted them for use with [Ramda](https://ramdajs.com/)
+#### promiseMap
 
-#### bromiseMap
-
-`bromiseMap(asyncFn : Function, array : Array): Promise`
+`promiseMap(asyncFn : Function, array : Array): Promise`
 
 This function allows to apply a map but with an asynchronous function
 
@@ -54,18 +52,18 @@ This function allows to apply a map but with an asynchronous function
 **Exemple**
 
 ```js
-const {bromiseMap} = require('bobda');
+const {promiseMap} = require('bobda');
 
 const squareAsync = async value =>
   new Promise(resolve => setTimeout(() => resolve(value * value), 30));
 
 const array = [2, 3, 4, 5];
-bromiseMap(squareAsync)(array); //=> Promise
+promiseMap(squareAsync)(array); //=> Promise
 ```
 
-#### bromiseAll
+#### promiseAll
 
-`bromiseAll(array : Array<Promise>): Promise`
+`promiseAll(array : Array<Promise>): Promise`
 
 This function allows you to wait until all the promises contained in an array are resolved
 
@@ -77,7 +75,7 @@ This function allows you to wait until all the promises contained in an array ar
 
 ```js
 const R = require('ramda');
-const {bromiseAll} = require('bobda');
+const {promiseAll} = require('bobda');
 
 const incrementAsync = async value =>
   new Promise(resolve => setTimeout(() => resolve(++value), 30));
@@ -86,12 +84,12 @@ const squareAsync = async value =>
   new Promise(resolve => setTimeout(() => resolve(value * value), 30));
 
 const value = 2;
-bromiseAll(R.juxt([incrementAsync, squareAsync]))(value); //=> Promise
+promiseAll(R.juxt([incrementAsync, squareAsync]))(value); //=> Promise
 ```
 
-#### bromiseProps
+#### promiseProps
 
-`bromiseProps(object : Object): Promise`
+`promiseProps(object : Object): Promise`
 
 This function allows you to wait until all the promises contained in an object as key are resolved
 
@@ -103,7 +101,7 @@ This function allows you to wait until all the promises contained in an object a
 
 ```js
 const R = require('ramda');
-const {bromiseProps} = require('bobda');
+const {promiseProps} = require('bobda');
 
 const incrementAsync = async value =>
   new Promise(resolve => setTimeout(() => resolve(++value), 30));
@@ -113,7 +111,7 @@ const squareAsync = async value =>
 
 const value = 2;
 
-bromiseProps(R.applySpec({incrementResult: incrementAsync, squareResult: squareAsync}))(value) //=> Promise
+promiseProps(R.applySpec({incrementResult: incrementAsync, squareResult: squareAsync}))(value) //=> Promise
 ```
 
 ### Object properties functions
