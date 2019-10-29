@@ -1,6 +1,6 @@
 {
   "name": "bobda",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Some tools for ramda",
   "main": "bobda.js",
   "repository": {
@@ -8,7 +8,8 @@
     "type": "git"
   },
   "license": "MIT",
-  "keywords": ["ramda",
+  "keywords": [
+    "ramda",
     "utils",
     "utilities",
     "toolkit",
@@ -18,14 +19,18 @@
     "recipes",
     "extras",
     "cookbook",
-    "functional"],
+    "functional"
+  ],
   "homepage": "https://github.com/A1c0/bobda",
   "bugs": "https://github.com/A1c0/bobda/issues",
   "contributors": [
     "Baptiste Chevallier <baptiste@thechatbotfactory.com>",
     "Alexandre Contassot <alexandrecontassot@hotmail.fr>"
   ],
-  "files": ["index.js", "app/*.js"],
+  "files": [
+    "index.js",
+    "app/*.js"
+  ],
   "scripts": {
     "test": "nyc mocha --recursive",
     "code-style": "xo"
@@ -52,7 +57,6 @@
     "xo": "^0.24.0"
   },
   "dependencies": {
-    "bluebird": "^3.5.5",
     "ramda": "^0.26.1"
   }
 }

@@ -2,9 +2,9 @@ const deepEqualInAnyOrder = require('deep-equal-in-any-order');
 const chai = require('chai');
 const R = require('ramda');
 const {
-  bromiseAll,
-  bromiseMap,
-  bromiseProps,
+  promiseAll,
+  promiseMap,
+  promiseProps,
   renamePath,
   renameProp,
   multiPath
@@ -26,23 +26,23 @@ chai.should();
 chai.use(deepEqualInAnyOrder);
 
 describe('test bobda', () => {
-  describe('#bromiseAll', () => {
+  describe('#promiseAll', () => {
     it('should return a promise', async () => {
-      (await bromiseAll(
+      (await promiseAll(
         R.juxt([incrementAsync, squareAsync])(value)
       )).should.be.eql([3, 4]);
     });
   });
 
-  describe('#bromiseMap', () => {
+  describe('#promiseMap', () => {
     it('should return a promise', async () => {
-      (await bromiseMap(incrementAsync)(array)).should.be.eql([3, 4, 5, 6]);
+      (await promiseMap(incrementAsync)(array)).should.be.eql([3, 4, 5, 6]);
     });
   });
 
-  describe('#bromiseProps', () => {
+  describe('#promiseProps', () => {
     it('should return a promise', async () => {
-      (await bromiseProps(
+      (await promiseProps(
         R.applySpec({val: incrementAsync})(value)
       )).should.be.eql({val: 3});
     });
