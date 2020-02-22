@@ -1,6 +1,6 @@
 {
   "name": "bobda",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Some tools for ramda",
   "main": "bobda.js",
   "repository": {
@@ -57,6 +57,6 @@
     "xo": "^0.24.0"
   },
   "dependencies": {
-    "ramda": "^0.26.1"
+    "ramda": "^0.27.0"
   }
 }
