@@ -1,13 +1,13 @@
-# Bobda <!-- omit in toc --> 
+# Bobda <!-- omit in toc -->
 
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 [![npm version](https://badge.fury.io/js/bobda.svg)](https://badge.fury.io/js/bobda)
 
-![logo](https://image.noelshack.com/fichiers/2019/28/4/1562845380-bobda.png)
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/5LB5d0Q/1562845380-bobda.png" alt="1562845380-bobda" border="0"></a>
 
-It's an add-on module for [Ramda](https://ramdajs.com/), so all functions are [curry](https://ramdajs.com/docs/#curry). 
+It's an add-on module for [Ramda](https://ramdajs.com/), so all functions are [curry](https://ramdajs.com/docs/#curry).
 
-## Table of Contents <!-- omit in toc --> 
+## Table of Contents <!-- omit in toc -->
 
 - [Installation](#Installation)
 - [Documentation](#Documentation)
@@ -125,9 +125,9 @@ This function allows you to rename a prop into the given object.
 
 **Argments**
 
-- *from* : Name of the prop you want to rename 
+- *from* : Name of the prop you want to rename
 - *to* : New name you want to give to this prop
-- *object* : This function is curried by default, last argument (not explicitly given) is the object 
+- *object* : This function is curried by default, last argument (not explicitly given) is the object
 
 **Exemple**
 
@@ -140,7 +140,7 @@ const myAwesomePipe = R.pipe(
   renameProp('prop1', 'readTheDoc')
 )
 
-myAwesomePipe(myAwesomeObj) 
+myAwesomePipe(myAwesomeObj)
 /* =>
 {
   readTheDoc : 'chapi',
@@ -150,7 +150,7 @@ myAwesomePipe(myAwesomeObj)
 ```
 
 **Note**
-Read test for other examples. 
+Read test for other examples.
 
 #### renamePath
 
@@ -161,17 +161,17 @@ This function allows you to rename a path into the given object.
 
 **Argments**
 
-- *from* : Name of the path you want to rename 
+- *from* : Name of the path you want to rename
 - *to* : New name you want to give to this path
-- *object* : This function is curried by default, last argument (not explicitly given) is the object 
+- *object* : This function is curried by default, last argument (not explicitly given) is the object
 
 **Exemple**
 
 ```js
 const myAwesomeObj = {
   prop1 : 'chapi',
-  prop2 : { 
-    chapo : { 
+  prop2 : {
+    chapo : {
       patapo : true
     }
   }
@@ -180,12 +180,12 @@ const myAwesomePipe = R.pipe(
   renamePath(['prop2','chapo','patapo'], ['chapi','chapo','patapo'])
 )
 
-myAwesomePipe(myAwesomeObj) 
+myAwesomePipe(myAwesomeObj)
 /* =>
 {
   prop1 : 'chapi',
-  chapi : { 
-    chapo : { 
+  chapi : {
+    chapo : {
       patapo : true
     }
   }
@@ -202,11 +202,11 @@ Read test for other examples.
 
 **Argments**
 
-- *mappingRename* : Name of the path you want to rename 
+- *mappingRename* : Name of the path you want to rename
 - *object* : New name you want to give to this path
 
 This function take list of tuples and recursively replace the path [0] with the path [1] into the given object.
-  
+
 **Exemple**
 
 ```js
@@ -223,7 +223,7 @@ const inObj = {
   a: {ces: 0}
 };
 
-multiPath(listOfPaths, inObj) 
+multiPath(listOfPaths, inObj)
 /* =>
 {
   qui: {courait: {dans: true}},
