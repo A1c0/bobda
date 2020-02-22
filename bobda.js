@@ -11,7 +11,7 @@ const promiseProps = R.pipe(
   R.juxt([R.keys, _awaitAllPromiseValues]),
   R.pipe(
     promiseAll,
-    R.then(R.apply(R.zipObj))
+    R.andThen(R.apply(R.zipObj))
   )
 );
 
