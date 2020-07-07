@@ -1,13 +1,15 @@
 const deepEqualInAnyOrder = require('deep-equal-in-any-order');
 const chai = require('chai');
 const R = require('ramda');
+const Maybe = require('sanctuary-maybe');
 const {
   promiseAll,
   promiseMap,
   promiseProps,
   renamePath,
   renameProp,
-  multiPath
+  multiPath,
+  chainedDefaultTo
 } = require('../bobda');
 
 const {objTest, objPropRenamed, objFullRenamed} = require('./data/data');
@@ -28,9 +30,9 @@ chai.use(deepEqualInAnyOrder);
 describe('test bobda', () => {
   describe('#promiseAll', () => {
     it('should return a promise', async () => {
-      (await promiseAll(
-        R.juxt([incrementAsync, squareAsync])(value)
-      )).should.be.eql([3, 4]);
+      (
+        await promiseAll(R.juxt([incrementAsync, squareAsync])(value))
+      ).should.be.eql([3, 4]);
     });
   });
 
@@ -42,9 +44,9 @@ describe('test bobda', () => {
 
   describe('#promiseProps', () => {
     it('should return a promise', async () => {
-      (await promiseProps(
-        R.applySpec({val: incrementAsync})(value)
-      )).should.be.eql({val: 3});
+      (
+        await promiseProps(R.applySpec({val: incrementAsync})(value))
+      ).should.be.eql({val: 3});
     });
   });
 
@@ -68,8 +70,14 @@ describe('test bobda', () => {
   describe('#multiPath', () => {
     it('should apply renamePath  for list', () => {
       const listOfPaths = [
-        [['une', 'souris', 'verte'], ['qui', 'courait', 'dans']],
-        [['l', 'herbe'], ['je', 'la', 'montre']],
+        [
+          ['une', 'souris', 'verte'],
+          ['qui', 'courait', 'dans']
+        ],
+        [
+          ['l', 'herbe'],
+          ['je', 'la', 'montre']
+        ],
         [['a', 'ces'], ['messieurs']]
       ];
 
@@ -89,6 +97,21 @@ describe('test bobda', () => {
       };
 
       multiPath(listOfPaths, inObj).should.be.eql(outObj);
+    });
+  });
+
+  describe('#chainedDefaultTo', () => {
+    const checkedObject = {a: 1, b: 2, c: 3};
+    it('should return the first value found', () => {
+      chainedDefaultTo([['a'], ['b']], checkedObject).should.be.eql(1);
+      chainedDefaultTo([['b'], ['a']], checkedObject).should.be.eql(2);
+      chainedDefaultTo([['c'], ['a']], checkedObject).should.be.eql(3);
+    });
+
+    it('should return Nothing', () => {
+      chainedDefaultTo([['z']], checkedObject).should.be.deep.eql(
+        Maybe.Nothing
+      );
     });
   });
 });
