@@ -55,6 +55,29 @@ const _readJsonProto = rfFn =>
     )
   );
 
+const csvTest = `number,string,boolean
+12,text,true`;
+
+const mapZipObj = (keys, array) =>
+  R.map(R.zipObj(keys), array);
+
+const tryParse = x =>
+  R.tryCatch(jsonParse, R.always(x))(x);
+
+const csvParse = R.pipe(
+  R.split('\n'),
+  R.map(R.split(',')),
+  R.converge(mapZipObj, [
+    R.head,
+    R.pipe(
+      R.tail,
+      R.map(R.map(tryParse))
+    )
+  ])
+);
+
+console.log(csvParse(csvTest));
+
 const _readCsvProto = rfFn =>
   R.pipe(rfFn, thenIfPromise(csvParse));
 

@@ -1,5 +1,4 @@
 const R = require('ramda');
-
 const promiseAll = R.bind(
   Promise.all,
   Promise
@@ -16,7 +15,7 @@ const promiseProps = R.pipe(
     _awaitAllPromiseValues
   ]),
   promiseAll,
-  R.then(R.apply(R.zipObj))
+  R.andThen(R.apply(R.zipObj))
 );
 
 const promiseMap = R.curry((fn, list) =>
@@ -30,7 +29,7 @@ const _isPromise = R.pipe(
 const thenIfPromise = pipe =>
   R.ifElse(
     _isPromise,
-    R.then(pipe),
+    R.andThen(pipe),
     pipe
   );
 
