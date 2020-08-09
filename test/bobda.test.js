@@ -45,7 +45,11 @@ describe('test bobda', () => {
   describe('#promiseProps', () => {
     it('should return a promise', async () => {
       (
-        await promiseProps(R.applySpec({val: incrementAsync})(value))
+        await promiseProps(
+          R.applySpec({
+            val: incrementAsync
+          })(value)
+        )
       ).should.be.eql({val: 3});
     });
   });
@@ -101,7 +105,11 @@ describe('test bobda', () => {
   });
 
   describe('#chainedDefaultTo', () => {
-    const checkedObject = {a: 1, b: 2, c: 3};
+    const checkedObject = {
+      a: 1,
+      b: 2,
+      c: 3
+    };
     it('should return the first value found', () => {
       chainedDefaultTo([['a'], ['b']], checkedObject).should.be.eql(1);
       chainedDefaultTo([['b'], ['a']], checkedObject).should.be.eql(2);

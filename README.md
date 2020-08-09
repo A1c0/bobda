@@ -27,10 +27,13 @@ It's an add-on module for [Ramda](https://ramdajs.com/), so all functions are [c
 ```
 $ yarn add bobda
 ```
+
 or
+
 ```
 $ npm install bobda
 ```
+
 ---
 
 ## Documentation
@@ -45,9 +48,9 @@ This function allows to apply a map but with an asynchronous function
 
 **Arguments**
 
-*asyncFn*: The asynchronous function who whant to apply
+_asyncFn_: The asynchronous function who whant to apply
 
-*array*: The array who want to apply a map
+_array_: The array who want to apply a map
 
 **Exemple**
 
@@ -69,7 +72,7 @@ This function allows you to wait until all the promises contained in an array ar
 
 **Arguments**
 
-*array*: The array of promise
+_array_: The array of promise
 
 **Exemple**
 
@@ -95,7 +98,7 @@ This function allows you to wait until all the promises contained in an object a
 
 **Arguments**
 
-*object*: The array of promise
+_object_: The array of promise
 
 **Exemple**
 
@@ -111,7 +114,12 @@ const squareAsync = async value =>
 
 const value = 2;
 
-promiseProps(R.applySpec({incrementResult: incrementAsync, squareResult: squareAsync}))(value) //=> Promise
+promiseProps(
+  R.applySpec({
+    incrementResult: incrementAsync,
+    squareResult: squareAsync
+  })
+)(value); //=> Promise
 ```
 
 ### Object properties functions
@@ -122,25 +130,22 @@ promiseProps(R.applySpec({incrementResult: incrementAsync, squareResult: squareA
 
 This function allows you to rename a prop into the given object.
 
-
 **Argments**
 
-- *from* : Name of the prop you want to rename
-- *to* : New name you want to give to this prop
-- *object* : This function is curried by default, last argument (not explicitly given) is the object
+- _from_ : Name of the prop you want to rename
+- _to_ : New name you want to give to this prop
+- _object_ : This function is curried by default, last argument (not explicitly given) is the object
 
 **Exemple**
 
 ```js
 const myAwesomeObj = {
-  prop1 : 'chapi',
-  prop2 : 'chapo'
-}
-const myAwesomePipe = R.pipe(
-  renameProp('prop1', 'readTheDoc')
-)
+  prop1: 'chapi',
+  prop2: 'chapo'
+};
+const myAwesomePipe = R.pipe(renameProp('prop1', 'readTheDoc'));
 
-myAwesomePipe(myAwesomeObj)
+myAwesomePipe(myAwesomeObj);
 /* =>
 {
   readTheDoc : 'chapi',
@@ -158,29 +163,28 @@ Read test for other examples.
 
 This function allows you to rename a path into the given object.
 
-
 **Argments**
 
-- *from* : Name of the path you want to rename
-- *to* : New name you want to give to this path
-- *object* : This function is curried by default, last argument (not explicitly given) is the object
+- _from_ : Name of the path you want to rename
+- _to_ : New name you want to give to this path
+- _object_ : This function is curried by default, last argument (not explicitly given) is the object
 
 **Exemple**
 
 ```js
 const myAwesomeObj = {
-  prop1 : 'chapi',
-  prop2 : {
-    chapo : {
-      patapo : true
+  prop1: 'chapi',
+  prop2: {
+    chapo: {
+      patapo: true
     }
   }
-}
+};
 const myAwesomePipe = R.pipe(
-  renamePath(['prop2','chapo','patapo'], ['chapi','chapo','patapo'])
-)
+  renamePath(['prop2', 'chapo', 'patapo'], ['chapi', 'chapo', 'patapo'])
+);
 
-myAwesomePipe(myAwesomeObj)
+myAwesomePipe(myAwesomeObj);
 /* =>
 {
   prop1 : 'chapi',
@@ -202,18 +206,23 @@ Read test for other examples.
 
 **Argments**
 
-- *mappingRename* : Name of the path you want to rename
-- *object* : New name you want to give to this path
+- _mappingRename_ : Name of the path you want to rename
+- _object_ : New name you want to give to this path
 
 This function take list of tuples and recursively replace the path [0] with the path [1] into the given object.
 
 **Exemple**
 
 ```js
-
 const listOfPaths = [
-  [['une', 'souris', 'verte'], ['qui', 'courait', 'dans']],
-  [['l', 'herbe'], ['je', 'la', 'montre']],
+  [
+    ['une', 'souris', 'verte'],
+    ['qui', 'courait', 'dans']
+  ],
+  [
+    ['l', 'herbe'],
+    ['je', 'la', 'montre']
+  ],
   [['a', 'ces'], ['messieurs']]
 ];
 
@@ -223,7 +232,7 @@ const inObj = {
   a: {ces: 0}
 };
 
-multiPath(listOfPaths, inObj)
+multiPath(listOfPaths, inObj);
 /* =>
 {
   qui: {courait: {dans: true}},

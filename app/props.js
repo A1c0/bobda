@@ -1,10 +1,7 @@
 const R = require('ramda');
 
 const renameProp = R.curry((from, to) =>
-  R.pipe(
-    R.converge(R.assoc(to), [R.prop(from), R.identity]),
-    R.dissoc(from)
-  )
+  R.pipe(R.converge(R.assoc(to), [R.prop(from), R.identity]), R.dissoc(from))
 );
 
 const renamePath = R.curry((from, to, obj) =>
@@ -22,4 +19,8 @@ const multiPath = R.curry((mappingRename, objToRename) =>
   )
 );
 
-module.exports = {renameProp, renamePath, multiPath};
+module.exports = {
+  renameProp,
+  renamePath,
+  multiPath
+};

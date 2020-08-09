@@ -23,4 +23,8 @@ const objFullRenamed = {
   }
 };
 
-module.exports = {objTest, objPropRenamed, objFullRenamed};
+module.exports = {
+  objTest,
+  objPropRenamed,
+  objFullRenamed
+};

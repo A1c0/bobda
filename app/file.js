@@ -22,28 +22,20 @@ const ensurePath = R.pipe(
 );
 
 const _writeFileProto = R.curry((wfFn, path, buffer) =>
-  R.pipe(
-    R.tap(ensurePath),
-    wfFn(R.__, buffer)
-  )(path)
+  R.pipe(R.tap(ensurePath), wfFn(R.__, buffer))(path)
 );
 
 const _readJsonProto = rfFn =>
-  R.pipe(
-    rfFn,
-    thenIfPromise(
-      R.pipe(
-        R.toString,
-        jsonParse
-      )
-    )
-  );
+  R.pipe(rfFn, thenIfPromise(R.pipe(R.toString, jsonParse)));
+
+const _readCsvProto = rfFn => R.pipe(rfFn, thenIfPromise(csvParse));
 
 const _writeJsonProto = R.curry((wfFn, path, buffer) =>
-  R.pipe(
-    jsonStringify,
-    wfFn(path)
-  )(buffer)
+  R.pipe(jsonStringify, wfFn(path))(buffer)
+);
+
+const _writeCsvProto = R.curry((wfFn, path, buffer) =>
+  R.pipe(jsonStringify, wfFn(path))(buffer)
 );
 
 const _writeFileSync = R.curry(R.binary(fs.writeFileSync));
