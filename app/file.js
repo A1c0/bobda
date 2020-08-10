@@ -76,7 +76,32 @@ const csvParse = R.pipe(
   ])
 );
 
-console.log(csvParse(csvTest));
+const obj = [
+  {a: 10, b: true, c: 'HELLO'},
+  {a: 34, b: false, c: 'kikou'}
+];
+
+const getKeysOfFirstElm = R.pipe(
+  R.head,
+  R.keys
+);
+
+const getValuesGroupByRow = R.pipe(
+  R.tail,
+  R.map(R.values)
+);
+
+const csvStringify = R.pipe(
+  R.converge(R.prepend,[
+    getKeysOfFirstElm,
+    getValuesGroupByRow
+  ]),
+  R.tap(console.log),
+  R.map(R.join(',')),
+  R.join('\n')
+);
+
+console.log(csvStringify(obj));
 
 const _readCsvProto = rfFn =>
   R.pipe(rfFn, thenIfPromise(csvParse));
