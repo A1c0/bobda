@@ -58,12 +58,7 @@ _array_: The array who want to apply a map
 const {promiseMap} = require('bobda');
 
 const squareAsync = async value =>
-  new Promise(resolve =>
-    setTimeout(
-      () => resolve(value * value),
-      30
-    )
-  );
+  new Promise(resolve => setTimeout(() => resolve(value * value), 30));
 
 const array = [2, 3, 4, 5];
 promiseMap(squareAsync)(array); //=> Promise
@@ -86,25 +81,13 @@ const R = require('ramda');
 const {promiseAll} = require('bobda');
 
 const incrementAsync = async value =>
-  new Promise(resolve =>
-    setTimeout(
-      () => resolve(++value),
-      30
-    )
-  );
+  new Promise(resolve => setTimeout(() => resolve(++value), 30));
 
 const squareAsync = async value =>
-  new Promise(resolve =>
-    setTimeout(
-      () => resolve(value * value),
-      30
-    )
-  );
+  new Promise(resolve => setTimeout(() => resolve(value * value), 30));
 
 const value = 2;
-promiseAll(
-  R.juxt([incrementAsync, squareAsync])
-)(value); //=> Promise
+promiseAll(R.juxt([incrementAsync, squareAsync]))(value); //=> Promise
 ```
 
 #### promiseProps
@@ -124,20 +107,10 @@ const R = require('ramda');
 const {promiseProps} = require('bobda');
 
 const incrementAsync = async value =>
-  new Promise(resolve =>
-    setTimeout(
-      () => resolve(++value),
-      30
-    )
-  );
+  new Promise(resolve => setTimeout(() => resolve(++value), 30));
 
 const squareAsync = async value =>
-  new Promise(resolve =>
-    setTimeout(
-      () => resolve(value * value),
-      30
-    )
-  );
+  new Promise(resolve => setTimeout(() => resolve(value * value), 30));
 
 const value = 2;
 
@@ -170,9 +143,7 @@ const myAwesomeObj = {
   prop1: 'chapi',
   prop2: 'chapo'
 };
-const myAwesomePipe = R.pipe(
-  renameProp('prop1', 'readTheDoc')
-);
+const myAwesomePipe = R.pipe(renameProp('prop1', 'readTheDoc'));
 
 myAwesomePipe(myAwesomeObj);
 /* =>
@@ -210,10 +181,7 @@ const myAwesomeObj = {
   }
 };
 const myAwesomePipe = R.pipe(
-  renamePath(
-    ['prop2', 'chapo', 'patapo'],
-    ['chapi', 'chapo', 'patapo']
-  )
+  renamePath(['prop2', 'chapo', 'patapo'], ['chapi', 'chapo', 'patapo'])
 );
 
 myAwesomePipe(myAwesomeObj);

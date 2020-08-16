@@ -13,6 +13,7 @@ const objPropRenamed = {
     a: 'gg ez'
   }
 };
+
 const objFullRenamed = {
   chapi: 'value',
   chapo: {

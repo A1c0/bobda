@@ -12,27 +12,13 @@ const {
   chainedDefaultTo
 } = require('../bobda');
 
-const {
-  objTest,
-  objPropRenamed,
-  objFullRenamed
-} = require('./data/data');
+const {objTest, objPropRenamed, objFullRenamed} = require('./data/data');
 
 const incrementAsync = async value =>
-  new Promise(resolve =>
-    setTimeout(
-      () => resolve(++value),
-      30
-    )
-  );
+  new Promise(resolve => setTimeout(() => resolve(++value), 30));
 
 const squareAsync = async value =>
-  new Promise(resolve =>
-    setTimeout(
-      () => resolve(value * value),
-      30
-    )
-  );
+  new Promise(resolve => setTimeout(() => resolve(value * value), 30));
 
 const value = 2;
 
@@ -45,23 +31,14 @@ describe('test bobda', () => {
   describe('#promiseAll', () => {
     it('should return a promise', async () => {
       (
-        await promiseAll(
-          R.juxt([
-            incrementAsync,
-            squareAsync
-          ])(value)
-        )
+        await promiseAll(R.juxt([incrementAsync, squareAsync])(value))
       ).should.be.eql([3, 4]);
     });
   });
 
   describe('#promiseMap', () => {
     it('should return a promise', async () => {
-      (
-        await promiseMap(
-          incrementAsync
-        )(array)
-      ).should.be.eql([3, 4, 5, 6]);
+      (await promiseMap(incrementAsync)(array)).should.be.eql([3, 4, 5, 6]);
     });
   });
 
@@ -79,33 +56,18 @@ describe('test bobda', () => {
 
   describe('#renameProp', () => {
     it('should rename prop from an object to the specified name', () => {
-      const foo = R.pipe(
-        renameProp(
-          'propString',
-          'chapi'
-        )
-      );
-      foo(objTest).should.eql(
-        objPropRenamed
-      );
+      const foo = R.pipe(renameProp('propString', 'chapi'));
+      foo(objTest).should.eql(objPropRenamed);
     });
   });
 
   describe('#renameProp', () => {
     it('should rename prop from an object to the specified name', () => {
       const foo = R.pipe(
-        renameProp(
-          'propString',
-          'chapi'
-        ),
-        renamePath(
-          ['propObj', 'propBool'],
-          ['chapo', 'patapo']
-        )
+        renameProp('propString', 'chapi'),
+        renamePath(['propObj', 'propBool'], ['chapo', 'patapo'])
       );
-      foo(objTest).should.eql(
-        objFullRenamed
-      );
+      foo(objTest).should.eql(objFullRenamed);
     });
   });
 
@@ -138,10 +100,7 @@ describe('test bobda', () => {
         une: {souris: {}}
       };
 
-      multiPath(
-        listOfPaths,
-        inObj
-      ).should.be.eql(outObj);
+      multiPath(listOfPaths, inObj).should.be.eql(outObj);
     });
   });
 
@@ -152,25 +111,13 @@ describe('test bobda', () => {
       c: 3
     };
     it('should return the first value found', () => {
-      chainedDefaultTo(
-        [['a'], ['b']],
-        checkedObject
-      ).should.be.eql(1);
-      chainedDefaultTo(
-        [['b'], ['a']],
-        checkedObject
-      ).should.be.eql(2);
-      chainedDefaultTo(
-        [['c'], ['a']],
-        checkedObject
-      ).should.be.eql(3);
+      chainedDefaultTo([['a'], ['b']], checkedObject).should.be.eql(1);
+      chainedDefaultTo([['b'], ['a']], checkedObject).should.be.eql(2);
+      chainedDefaultTo([['c'], ['a']], checkedObject).should.be.eql(3);
     });
 
     it('should return Nothing', () => {
-      chainedDefaultTo(
-        [['z']],
-        checkedObject
-      ).should.be.deep.eql(
+      chainedDefaultTo([['z']], checkedObject).should.be.deep.eql(
         Maybe.Nothing
       );
     });

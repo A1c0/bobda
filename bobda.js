@@ -7,18 +7,11 @@ const Maybe = require('sanctuary-maybe');
  * @param {Object} - Object from which we extract the data
  * @returns The first data found, else Nothing
  */
-const chainedDefaultTo = R.curry(
-  (pathsList, extractedObject) =>
-    R.pipe(
-      R.paths,
-      R.reduce(
-        R.defaultTo,
-        Maybe.Nothing
-      )
-    )(
-      R.reverse(pathsList),
-      extractedObject
-    )
+const chainedDefaultTo = R.curry((pathsList, extractedObject) =>
+  R.pipe(R.paths, R.reduce(R.defaultTo, Maybe.Nothing))(
+    R.reverse(pathsList),
+    extractedObject
+  )
 );
 
 const {
@@ -29,21 +22,16 @@ const {
   readJsonSync,
   readJson,
   writeJsonSync,
-  writeJson
+  writeJson,
+  readCsvSync,
+  readCsv,
+  writeCsvSync,
+  writeCsv
 } = require('./app/file');
 
-const {
-  promiseAll,
-  promiseMap,
-  promiseProps,
-  thenIfPromise
-} = require('./app/promise');
+const {promiseAll, promiseMap, promiseProps} = require('./app/promise');
 
-const {
-  renameProp,
-  renamePath,
-  multiPath
-} = require('./app/props');
+const {renameProp, renamePath, multiPath} = require('./app/props');
 
 module.exports = {
   chainedDefaultTo,
@@ -55,10 +43,13 @@ module.exports = {
   readJson,
   writeJsonSync,
   writeJson,
+  readCsvSync,
+  readCsv,
+  writeCsvSync,
+  writeCsv,
   promiseAll,
   promiseMap,
   promiseProps,
-  thenIfPromise,
   renameProp,
   renamePath,
   multiPath
