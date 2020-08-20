@@ -248,3 +248,31 @@ multiPath(listOfPaths, inObj);
 **Note**
 
 Read test for other examples.
+
+
+  readFile,
+  writeFile,
+  readJson,
+  writeJson,
+  readCsv,
+  writeCsv,
+
+### Read/write files Functions
+
+#### readFile
+
+`readFile(path : String): Promise<Buffer>`
+
+This function allows to read a file
+
+**Arguments**
+
+_path_: The path of the file
+
+**Exemple**
+
+```js
+const {readFile} = require('bobda');
+readFile('path/to/the/file'); //=> Promise<Buffer>
+```
+> readFileSync exist too

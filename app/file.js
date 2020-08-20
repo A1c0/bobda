@@ -49,7 +49,8 @@ const csvStringify = R.pipe(
   R.join('\n')
 );
 
-const _readCsvProto = rfFn => R.pipe(rfFn, thenIfPromise(csvParse));
+const _readCsvProto = rfFn =>
+  R.pipe(rfFn, thenIfPromise(R.pipe(R.toString, csvParse)));
 
 const _writeJsonProto = R.curry((wfFn, path, buffer) =>
   R.pipe(jsonStringify, wfFn(path))(buffer)
