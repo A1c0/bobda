@@ -1,3 +1,4 @@
+
 const R = require('ramda');
 const Maybe = require('sanctuary-maybe');
 
@@ -14,40 +15,42 @@ const chainedDefaultTo = R.curry((pathsList, extractedObject) =>
   )
 );
 
-const promiseAll = R.bind(Promise.all, Promise);
+const {
+  readFileSync,
+  readFile,
+  writeFileSync,
+  writeFile,
+  readJsonSync,
+  readJson,
+  writeJsonSync,
+  writeJson
+} = require('./app/file');
 
-const _awaitAllPromiseValues = R.pipe(R.values, promiseAll);
+const {
+  promiseAll,
+  promiseMap,
+  promiseProps,
+  thenIfPromise
+} = require('./app/promise');
 
-const promiseProps = R.pipe(
-  R.juxt([R.keys, _awaitAllPromiseValues]),
-  R.pipe(promiseAll, R.andThen(R.apply(R.zipObj)))
-);
-
-const promiseMap = R.curry((fn, list) => R.pipe(R.map(fn), promiseAll)(list));
-
-const renameProp = (from, to) =>
-  R.pipe(R.converge(R.assoc(to), [R.prop(from), R.identity]), R.dissoc(from));
-
-const renamePath = R.curry((from, to, obj) =>
-  R.pipe(
-    R.converge(R.assocPath(to), [R.path(from), R.identity]),
-    R.dissocPath(from)
-  )(obj)
-);
-
-const multiPath = R.curry((mappingRename, objToRename) =>
-  R.reduce(
-    (acc, [oldPath, newPath]) => renamePath(oldPath, newPath, acc),
-    objToRename,
-    mappingRename
-  )
-);
+const {renameProp, renamePath, multiPath} = require('./app/props');
 
 module.exports = {
   chainedDefaultTo,
+  readFileSync,
+  readFile,
+  writeFileSync,
+  writeFile,
+  readJsonSync,
+  readJson,
+  writeJsonSync,
+  writeJson,
   promiseProps,
   promiseMap,
   promiseAll,
+  promiseMap,
+  promiseProps,
+  thenIfPromise,
   renameProp,
   renamePath,
   multiPath

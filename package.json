@@ -28,7 +28,7 @@
     "Alexandre Contassot <alexandrecontassot@hotmail.fr>"
   ],
   "files": [
-    "index.js",
+    "bobda.js",
     "app/*.js"
   ],
   "scripts": {
